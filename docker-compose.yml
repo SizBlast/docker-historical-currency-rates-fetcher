@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  rates:
+    build: .
+    container_name: historical-currency-rates-fetcher
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data
+      - ./fetch_rates.py:/app/fetch_rates.py
+      - ./run-cron.sh:/app/run-cron.sh
+      - ./requirements.txt:/app/requirements.txt
+      - ./.env:/app/.env
+    restart: unless-stopped
